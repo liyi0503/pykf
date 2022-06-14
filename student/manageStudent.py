@@ -5,9 +5,14 @@ Time:2022/6/7 2:50 下午
 Project: pykf
 =========================
 """
+from common.mysqlUtil import MysqlUtil
+from student.studentBean import StudentBean
 
 
 class ManageStudent:
+
+    def __init__(self):
+        self.util = MysqlUtil()
 
     def manage(self):
         while True:
@@ -38,7 +43,10 @@ class ManageStudent:
         print('6:退出系统')
 
     def selectAll(self):
-        pass
+        result = self.util.query('select * from student')
+        for r in result:
+            s = StudentBean(r['name'], r['sex'], r['age'])
+            print(s)
 
     def selectByName(self):
         pass
